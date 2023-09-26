@@ -1,2 +1,97 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container w-90">
+  <div class="text-center">
+    <h1 class="mb-3">Battleships</h1>
+    <p>Number of games won: <%= @games.where(win: true).count %>/<%= @games.count %></p>
+  </div>
+
+  <div class="row justify-content-around">
+    <div class="col-sm-12 col-md-6 user-grid ">
+      <h3 class="text-center mb-3">You</h3>
+
+      <table class="user-table mx-auto" data-controller="random-table-cells">
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-sm-12 col-md-6 computer-grid">
+      <h3 class="text-center">Computer</h3>
+
+      <table class="computer-table mx-auto" data-controller="random-table-cells">
+         <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+        <tr>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+          <td data-random-table-cells-target="randomCell"></td>
+        </tr>
+      </table>
+    </div>
+    </div>
+  </div>
+
+  <div class="text-center my-5 d-none">
+    <h4>The winner is: </h4>
+  </div>
+</div>
