@@ -1,0 +1,214 @@
+<div class="container w-90 mb-3">
+  <div class="text-center">
+    <h1 class="mb-3">Battleships</h1>
+    <p>Number of games won: <%= Game.where(user_won: true).count %>/<%= Game.where(user: @user).count %></p>
+  </div>
+
+  <div class="text-center my-4">
+    <% if @game.end? %>
+      <h4><%= @winner %></h4>
+      <%= link_to 'New Game',:root, class: "btn btn-warning"%>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-around">
+    <div class="col-sm-12 col-md-6 user-grid ">
+      <h3 class="text-center mb-3">You</h3>
+      <p class="text-center"><%= @user_points %></p>
+
+      <table class="user-table mx-auto">
+        <tr>
+          <% @user_table[0..4].each do |cell| %>
+              <% if cell.boat_hit? %>
+                <td class="boat-hit"><% cell.id %></td>
+              <% elsif cell.boat.present? && cell.status == 'computer_played'%>
+                 <td class="boat-hit"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+              <% elsif cell.status == 'computer_played'%>
+                <td class="computer-cell"><% cell.id %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="boat"><% cell.boat.cell.id %></td>
+                <% else %>
+                  <td><% cell.id %></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% @user_table[5..9].each do |cell| %>
+            <% if cell.boat_hit? %>
+                <td class="boat-hit"><% cell.id %></td>
+              <% elsif cell.boat.present? && cell.status == 'computer_played'%>
+                 <td class="boat-hit"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+              <% elsif cell.status == 'computer_played'%>
+                <td class="computer-cell"><% cell.id %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="boat"><% cell.boat.cell.id %></td>
+                <% else %>
+                  <td><% cell.id %></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% @user_table[10..14].each do |cell| %>
+            <% if cell.boat_hit? %>
+                <td class="boat-hit"><% cell.id %></td>
+              <% elsif cell.boat.present? && cell.status == 'computer_played'%>
+                 <td class="boat-hit"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+              <% elsif cell.status == 'computer_played'%>
+                <td class="computer-cell"><% cell.id %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="boat"><% cell.boat.cell.id %></td>
+                <% else %>
+                  <td><% cell.id %></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+           <% @user_table[15..19].each do |cell| %>
+            <% if cell.boat_hit? %>
+                <td class="boat-hit"><% cell.id %></td>
+              <% elsif cell.boat.present? && cell.status == 'computer_played'%>
+                 <td class="boat-hit"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+              <% elsif cell.status == 'computer_played'%>
+                <td class="computer-cell"><% cell.id %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="boat"><% cell.boat.cell.id %></td>
+                <% else %>
+                  <td><% cell.id %></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+           <% @user_table[20..24].each do |cell| %>
+           <% if cell.boat_hit? %>
+                <td class="boat-hit"><% cell.id %></td>
+              <% elsif cell.boat.present? && cell.status == 'computer_played'%>
+                 <td class="boat-hit"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+              <% elsif cell.status == 'computer_played'%>
+                <td class="computer-cell"><% cell.id %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="boat"><% cell.boat.cell.id %></td>
+                <% else %>
+                  <td><% cell.id %></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+
+<%# ---------------------------------------------COMPUTER------------------------------------------------ %>
+    <div class="col-sm-12 col-md-6 computer-grid">
+      <h3 class="text-center">Computer</h3>
+       <p class="text-center"><%= @computer_points %></p>
+
+      <table class="computer-table mx-auto">
+         <tr>
+          <% @computer_table[0..4].each do |cell| %>
+            <% if cell.status == 'link' && @game.end? == false%>
+              <td><%= link_to 'click', game_cell_path(@game, cell), data: {turbo_method: :patch}, class: 'link' %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="computer-boat"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+                <% else %>
+                  <% if @game.end? && cell.user_played? == false %>
+                      <td class='link-inactive'><% cell.id %></td>
+                    <% else %>
+                      <td class="computer-cell"><% cell.id %></td>
+                  <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% @computer_table[5..9].each do |cell| %>
+             <% if cell.status == 'link' && @game.end? == false %>
+              <td><%= link_to 'click', game_cell_path(@game, cell), data: {turbo_method: :patch}, class: 'link' %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="computer-boat"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+                <% else %>
+                  <% if @game.end? && cell.user_played? == false %>
+                      <td class='link-inactive'><% cell.id %></td>
+                    <% else %>
+                      <td class="computer-cell"><% cell.id %></td>
+                  <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% @computer_table[10..14].each do |cell| %>
+             <% if cell.status == 'link' && @game.end? == false %>
+              <td><%= link_to 'click', game_cell_path(@game, cell), data: {turbo_method: :patch}, class: 'link' %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="computer-boat"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+                <% else %>
+                  <% if @game.end? && cell.user_played? == false %>
+                      <td class='link-inactive'><% cell.id %></td>
+                    <% else %>
+                      <td class="computer-cell"><% cell.id %></td>
+                  <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+           <% @computer_table[15..19].each do |cell| %>
+            <% if cell.status == 'link' && @game.end? == false %>
+              <td><%= link_to 'click', game_cell_path(@game, cell), data: {turbo_method: :patch}, class: 'link' %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="computer-boat"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+                <% else %>
+                  <% if @game.end? && cell.user_played? == false %>
+                      <td class='link-inactive'><% cell.id %></td>
+                    <% else %>
+                      <td class="computer-cell"><% cell.id %></td>
+                  <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+           <% @computer_table[20..24].each do |cell| %>
+            <% if cell.status == 'link' && @game.end? == false %>
+              <td><%= link_to 'click', game_cell_path(@game, cell), data: {turbo_method: :patch}, class: 'link' %></td>
+              <% else %>
+                <% if cell.boat.present? %>
+                  <td class="computer-boat"><% cell.id %></td>
+                  <% cell.update(status: 4) %>
+                <% else %>
+                  <% if @game.end? && cell.user_played? == false %>
+                      <td class='link-inactive'><% cell.id %></td>
+                    <% else %>
+                      <td class="computer-cell"><% cell.id %></td>
+                  <% end %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+    </div>
+  </div>
+
+</div>

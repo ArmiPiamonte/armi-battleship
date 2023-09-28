@@ -4,12 +4,36 @@
   background-color: #ADD9E6;
 }
 
-.selected {
+.boat {
   background-color: #A5292A;
+}
+
+.boat-hit {
+  background-color: green;
 }
 
 td {
   border: 1px solid black;
   width: 100px;
   height: 100px;
+}
+
+.computer-boat {
+  background-color: green;
+}
+
+.computer-cell {
+  background-color: red;
+}
+
+.link {
+  display: block;
+  height: 100%;
+  color: white;
+  background-color: white;
+  text-decoration: none;
+}
+
+.link-inactive {
+  background-color: white;
 }
